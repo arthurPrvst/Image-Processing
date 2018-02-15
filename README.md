@@ -16,5 +16,6 @@ error (MSE).
 ```res = filtrerImageX(noisedImage);```
 ```evaluerSolutionQX(res);```
 
+Note : you can get the magnitude (spectre) of the image using : ```afficherMagnitudeFourier('myImage.jpg');```
 ## Movement detection on images
 
