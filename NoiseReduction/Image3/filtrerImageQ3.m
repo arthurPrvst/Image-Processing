@@ -6,21 +6,24 @@ function imageFiltree = filtrerImageQ3(image)
 D = @(u,v) ((u-Du/2).^2 + (v-Dv/2).^2).^0.5; % distance euclidienne au centre
 D0 = 195; % le petit rayon du coupe bande numero 1
 D02 = 398; % le petit rayon du coupe bande numero 2
+
 W = 8; % la largeur de l'anneau du coupe bande numero 1
 W2 = 8; % la largeur de l'anneau du coupe bande numero 2
+
 [v,u] = meshgrid(1:Dv,1:Du);
-masque = double((D(u,v) < D0) | (D(u,v) > (D0+W)) & (D(u,v) < D02) | (D(u,v) > (D02+W2)));
+masque = double( ((D(u,v) < D0) | (D(u,v) > (D0+W))) & ((D(u,v) < D02) | (D(u,v) > (D02+W2))) );
+
+%masqueButterworthCoueBande1 = 1 /(1 +( (D(u,v)*W)/(mpower(D(u,v),2)-(D0*D0)) ));
+%masqueButterworthCoueBande2 = 1 /(1 +( (D(u,v)*W2)/(mpower(D(u,v),2)-(D02*D02)) ));
 
 subplot(1,2,1),imshow(masque);
-
-
-% le masque des coupes bandes 1 et 2 doit être de la bonne taille
+%le masque des coupes bandes 1 et 2 doit être de la bonne taille
 if ~isequal(size(masque),size(image))
     error('L''image et le masque doivent avoir la même taille.')
 end
 
 
-% On traite l'image en double
+%On traite l'image en double
 if isequal(class(image),'uint8')
     image = im2double(image);
 end
