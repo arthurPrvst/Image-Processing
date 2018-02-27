@@ -4,7 +4,7 @@ dim=size(image);
 masque=zeros(dim);
 
 
-[Du, Dv] = size(image); % taille du masque identique à celle de f
+[Du, Dv] = size(image); % taille du masque identique Ã  celle de f
 D = @(u,v) ((u-Du/2).^2 + (v-Dv/2).^2).^0.5; % distance euclidienne au centre
 D0 = 47; % le petit rayon
 W = 5; % la largeur de l'anneau
@@ -16,15 +16,15 @@ imageFiltree=appliquerFiltreFrequentiel(image,masque);
 end
 
 function [ imageFiltree ] = appliquerFiltreFrequentiel( image,masque)
-% Cette fonction applique un filtre fréquentiel.
+% Cette fonction applique un filtre frÃ©quentiel.
 %
 % exemple:
 % 
 
 
-% le masque doit être de la bonne taille
+% le masque doit Ãªtre de la bonne taille
 if ~isequal(size(masque),size(image))
-    error('L''image et le masque doivent avoir la même taille.')
+    error('L''image et le masque doivent avoir la mÃªme taille.')
 end
 
 % On traite l'image en double
@@ -41,6 +41,6 @@ Fc1 = Fc.*(masque);
 
 % Decentrage du spectre
 F1 = ifftshift(Fc1);
-% Calcul de la transformée inverse
+% Calcul de la transformÃ©e inverse
 imageFiltree = real( ifft2(F1) );
 end
