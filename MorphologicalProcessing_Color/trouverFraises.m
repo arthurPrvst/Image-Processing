@@ -1,5 +1,6 @@
 function [fraises, vert] = trouverFraises(imageFraises)
 global R G B;
+%On split limage en 3 couches
 R=imageFraises(:,:,1);
 G=imageFraises(:,:,2);
 B=imageFraises(:,:,3);
@@ -10,11 +11,13 @@ greenHSV=HSVgreenisolator(imageFraises);
 
 subplot(1,2,1),imshow(green);
 subplot(1,2,2),imshow(greenHSV);
-%subplot(1,3,3),imshow(green);
+subplot(1,3,3),imshow(red);
 
-fraises=1;%red;
-vert=1;%green;
+fraises=red;%red;
+vert=green;%green;
 end
+
+
 %function who find the red color
 function red=redisolator()
 global R G B;
@@ -23,12 +26,13 @@ dR=double(R);
 dG=double(G);
 dB=double(B);
 %red Threshold
-redTH=0.47;
+redTH=0.40;
 blueTH=redTH;
 % the blue filter doesnt actually have a impact....
 red= redTH>dG./dR & blueTH>dB./dR & dR > 100;
-
 end
+
+
 %function who find the "green" ish color include yellow ish color
 function green=greenisolator()
 global R G B;
@@ -39,11 +43,13 @@ dB=double(B);
 
 %valeur avec lesquel jouer 
 reddif=30;
-blueTH=0.6;
+blueTH=0.59;
 
 green= blueTH>dB./dG & reddif>abs(dG-dR) & dG > 100;
 %green=bwareaopen(green,20);
 end
+
+
 %function who find the "green" ish color include yellow ish color in HSV
 %format
 function green=HSVgreenisolator(ima)
