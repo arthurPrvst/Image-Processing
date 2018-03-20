@@ -23,5 +23,3 @@ bulle = bulle.NumObjects; %get number of single buble
 groupes = cc.NumObjects - bulle; %get number of connected component
 
 end
-
-
